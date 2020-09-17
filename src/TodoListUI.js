@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Input, Button, List } from 'antd';
 
 // UI组件 【建议写成无状态组件，性能更高】

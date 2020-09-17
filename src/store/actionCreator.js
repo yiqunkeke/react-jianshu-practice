@@ -1,4 +1,4 @@
-import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_ACTION} from './actionTypes'
+import { CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_LIST_ACTION, GET_INIT_LIST} from './actionTypes'
 import axios from 'axios'
 
 // actionCreator 必须是一个纯函数
@@ -44,5 +44,11 @@ export const getListAction = () => {
         .catch(() => {
         console.log('fail')
         })
+    }
+}
+
+export const getInitList = () => {
+    return {
+        type: GET_INIT_LIST
     }
 }

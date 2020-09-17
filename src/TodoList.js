@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import 'antd/dist/antd.css';
 import store from './store'
 import TodoListUI from './TodoListUI'
-import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getListAction } from './store/actionCreator'
+import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitList } from './store/actionCreator'
 
 class TodoList extends Component {
   constructor(props) {
@@ -12,10 +12,14 @@ class TodoList extends Component {
     store.subscribe(this.handleStoreChange)
   }
 
-  // 使用 redux-thunk 中间件：把异步请求统一封装到 action 中做处理
   componentDidMount() {
-    const action = getListAction()
-    store.dispatch(action) // 当给store dispatch一个函数时，这个函数会自动执行
+    // 方案1.redux-thunk：把异步请求统一封装到 action 中做处理
+    // const action = getListAction()
+    // store.dispatch(action) // 当给store dispatch一个函数时，这个函数会自动执行
+
+    // 方案2：redux-saga：把异步放在单独文件中【推荐】
+    const action = getInitList()
+    store.dispatch(action)
   }
 
   render() {
