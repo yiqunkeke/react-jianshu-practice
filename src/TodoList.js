@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import 'antd/dist/antd.css';
 import store from './store'
 import TodoListUI from './TodoListUI'
-import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getInitListAction } from './store/actionCreator'
-import axios from 'axios'
+import { getInputChangeAction, getAddItemAction, getDeleteItemAction, getListAction } from './store/actionCreator'
 
 class TodoList extends Component {
   constructor(props) {
@@ -15,15 +14,8 @@ class TodoList extends Component {
 
   // 使用 redux-thunk 中间件：把异步请求统一封装到 action 中做处理
   componentDidMount() {
-    axios.get('./list.json')
-    .then((res) => {
-      const data = res.data.list
-      const action = getInitListAction(data)
-      store.dispatch(action)
-    })
-    .catch(() => {
-      console.log('fail')
-    })
+    const action = getListAction()
+    store.dispatch(action) // 当给store dispatch一个函数时，这个函数会自动执行
   }
 
   render() {
